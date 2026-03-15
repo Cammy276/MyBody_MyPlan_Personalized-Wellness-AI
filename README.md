@@ -8,7 +8,11 @@ This project is a **Streamlit-based web app** that uses Google ADK and multiple 
 
 Deployment link on Google Cloud: https://mybodyplan-1034997483221.us-central1.run.app/
 
-📌 Tech Stack
+Voice over Demo link on Youtube: https://www.youtube.com/watch?v=Njd9PZFR8gE
+
+---
+
+# 📌 Tech Stack
 | Component                       | Technology / Tool                                             |
 | ------------------------------- | ------------------------------------------------------------- |
 | Frontend / UI                   | Streamlit                                                     |
@@ -21,7 +25,50 @@ Deployment link on Google Cloud: https://mybodyplan-1034997483221.us-central1.ru
 | Local Development               | Python 3.10+, Google Cloud CLI, Virtual Environment           |
 | Dependencies Management         | `requirements.txt`                                            |
 
-## Functional Diagrams
+---
+
+# System Architecture Diagram 
+
+```mermaid
+flowchart TB
+    subgraph Frontend
+        UI[Streamlit Web App]
+    end
+
+    subgraph Backend
+        Server[Python Backend / Flask]
+    end
+
+    subgraph AI_Model
+        Gemini[Gemini / ADK Agents]
+        Nutrition[Nutrition Agent]
+        Lifestyle[Lifestyle Agent]
+        ActionPlan[Action Plan Agent]
+        Gemini --> Nutrition
+        Gemini --> Lifestyle
+        Gemini --> ActionPlan
+    end
+
+    subgraph Environment
+        Env[Environment Variables / Cloud Secret Manager]
+    end
+
+    subgraph Deployment
+        Docker[Docker Container]
+        CloudRun[Google Cloud Run]
+        CloudBuild[Cloud Build]
+    end
+
+    UI --> Server
+    Server --> Gemini
+    Server --> Env
+    Server --> Docker
+    Docker --> CloudRun
+    CloudBuild --> Docker
+```
+---
+
+# Functional Diagrams
 
 ```mermaid
 flowchart TD
@@ -60,10 +107,7 @@ F --> G
 G --> H
 H --> I
 ```
-
 ---
-
-### System Architecture Diagram 
 
 ```mermaid
 flowchart TB
@@ -119,14 +163,13 @@ flowchart TB
     class D2,D5,F2,B,C,G localFunc
     classDef localFunc fill:#FFECB3,stroke:#FF6F00,stroke-width:2px,color:#000000
 ```
-
 ---
 
-⚙️ Local Deployment (Testing)
+# ⚙️ Local Deployment (Testing)
 
 Required if you want to test Model Armor / Gemini API locally.
 
-1. Install Google Cloud CLI
+# 1. Install Google Cloud CLI
 
 Download and install the official Google Cloud SDK (CLI) for your OS:
 
@@ -134,7 +177,7 @@ https://cloud.google.com/sdk/docs/install
 
 After installation, initialize it:
 
-gcloud init
+<pre>gcloud init</pre>
 
 Log in with your Google account
 
@@ -142,39 +185,41 @@ Select your project
 
 Set default region (e.g., us-central1)
 
-2. Clone the repository
-git clone https://github.com/Cammy276/MyBody_MyPlan_Personalized-Wellness-AI.git
-cd MyBody_MyPlan_Personalized-Wellness-AI
+# 2. Clone the repository
+<pre>git clone https://github.com/Cammy276/MyBody_MyPlan_Personalized-Wellness-AI.git
+cd MyBody_MyPlan_Personalized-Wellness-AI</pre>
 
-3. Create a virtual environment
-python -m venv .venv
+# 3. Create a virtual environment
+<pre>python -m venv .venv</pre>
+
 # Linux / Mac
-source .venv/bin/activate
+<pre>source .venv/bin/activate</pre>
+
 # Windows
-.venv\Scripts\activate
+<pre>.venv\Scripts\activate</pre>
 
-4. Install dependencies
-pip install --upgrade pip
-pip install -r requirements.txt
+# 4. Install dependencies
+<pre>pip install --upgrade pip
+pip install -r requirements.txt</pre>
 
-5. Set Environment Variables
+# 5. Set Environment Variables
 
 Create a .env file in the project root:
 
-GOOGLE_CLOUD_PROJECT="YOUR_PROJECT_ID"
+<pre>GOOGLE_CLOUD_PROJECT="YOUR_PROJECT_ID"
 GOOGLE_CLOUD_LOCATION="us-central1"
 GOOGLE_API_KEY="YOUR_GOOGLE_API_KEY"
-MODEL_ARMOR_TEMPLATE_ID="YOUR_TEMPLATE_ID"
+MODEL_ARMOR_TEMPLATE_ID="YOUR_TEMPLATE_ID"</pre>
 
 Or export them in the terminal:
 
-export GOOGLE_CLOUD_PROJECT="YOUR_PROJECT_ID"
+<pre>export GOOGLE_CLOUD_PROJECT="YOUR_PROJECT_ID"
 export GOOGLE_CLOUD_LOCATION="us-central1"
 export GOOGLE_API_KEY="YOUR_GOOGLE_API_KEY"
-export MODEL_ARMOR_TEMPLATE_ID="YOUR_TEMPLATE_ID"
+export MODEL_ARMOR_TEMPLATE_ID="YOUR_TEMPLATE_ID"</pre>
 
-6. Run the app locally
-streamlit run app/main.py
+# 6. Run the app locally
+<pre>streamlit run app/main.py</pre>
 
 Open your browser at http://localhost:8501
 
@@ -185,8 +230,8 @@ Generate your health plan and PDF
 Note: Local requests to Gemini/ADK may take 5–15 seconds per request.
 
 🐳 Docker Deployment
-1. Create Dockerfile in project root
-# Use official Python image
+# 1. Create Dockerfile in project root
+<pre># Use official Python image
 FROM python:3.11-slim
 
 # Set working directory
@@ -204,65 +249,71 @@ EXPOSE 8080
 
 # Run Streamlit
 CMD streamlit run app/main.py --server.port 8080 --server.address 0.0.0.0 --browser.serverAddress=0.0.0.0
+</pre>
 
-2. Create .dockerignore
-__pycache__/
+# 2. Create .dockerignore
+<pre>
+ __pycache__/
 *.pyc
 .env
 *.git
 .venv/
 node_modules/
+</pre>
 
 Reduces Docker image size dramatically (~3.5GB → <100MB).
 
-3. Build Docker image locally (optional)
-docker build -t mybodyplan .
-docker run -p 8080:8080 mybodyplan
+# 3. Build Docker image locally (optional)
+<pre>docker build -t mybodyplan .
+docker run -p 8080:8080 mybodyplan</pre>
 
-☁️ Google Cloud Deployment (Cloud Run)
-1. Initialize Google Cloud Project
+# ☁️ Google Cloud Deployment (Cloud Run)
+# 1. Initialize Google Cloud Project
 
 Go to Google Cloud Console
 
-Create a new project (e.g., nutrition-streamlit)
+Create a new project (e.g., mybodyplan)
 
 Note the Project ID
 
-2. Enable required services
-gcloud services enable run.googleapis.com
-gcloud services enable cloudbuild.googleapis.com
+# 2. Enable required services
+<pre>gcloud services enable run.googleapis.com
+gcloud services enable cloudbuild.googleapis.com</pre>
 
-3. Set project and region
-
+# 3. Set project and region
+<pre>
 gcloud config set project YOUR_PROJECT_ID
 gcloud config set run/region us-central1
-4. Clone your repo in Cloud Shell
-git clone https://github.com/Cammy276/MyBody_MyPlan_Personalized-Wellness-AI.git
+</pre>
+
+# 4. Clone your repo in Cloud Shell
+</pre>git clone https://github.com/Cammy276/MyBody_MyPlan_Personalized-Wellness-AI.git
 cd MyBody_MyPlan_Personalized-Wellness-AI
+</pre>
 
-5. Build the container image
-gcloud builds submit --tag gcr.io/YOUR_PROJECT_ID/mybodyplan .
+# 5. Build the container image
+<pre>gcloud builds submit --tag gcr.io/YOUR_PROJECT_ID/mybodyplan .</pre>
 
-6. Deploy to Cloud Run
-gcloud run deploy mybodyplan \
+# 6. Deploy to Cloud Run
+<pre> run deploy mybodyplan \
   --image gcr.io/YOUR_PROJECT_ID/mybodyplan \
   --platform managed \
-  --allow-unauthenticated
+  --allow-unauthenticated</pre>
 
 Cloud Run will provide a public URL:
 https://mybodyplan-123456789012.us-central1.run.app
 
-7. Set Environment Variables on Cloud Run
-gcloud run services update mybodyplan \
+# 7. Set Environment Variables on Cloud Run
+<pre>gcloud run services update mybodyplan \
     --update-env-vars \
 GOOGLE_CLOUD_PROJECT="YOUR_PROJECT_ID",\
 GOOGLE_CLOUD_LOCATION="us-central1",\
 GOOGLE_API_KEY="YOUR_GOOGLE_API_KEY",\
-MODEL_ARMOR_TEMPLATE_ID="YOUR_TEMPLATE_ID"
+MODEL_ARMOR_TEMPLATE_ID="YOUR_TEMPLATE_ID"</pre>
 
 The app can now access these variables via os.getenv().
 
-8. Test Your App
+# 8. Test Your App
 
 Open the Cloud Run URL
 
