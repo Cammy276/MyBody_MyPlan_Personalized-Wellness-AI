@@ -2,6 +2,8 @@
 
 This project is a **Streamlit-based web app** that uses Google ADK and multiple AI agents to generate **personalized nutrition, lifestyle, and action plans**, including PDF reports.
 
+Deployment link on Google Cloud: https://mybodyplan-1034997483221.us-central1.run.app/
+
 ---
 
 ## Functional Diagrams
