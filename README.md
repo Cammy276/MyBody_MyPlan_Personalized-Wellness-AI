@@ -323,6 +323,8 @@ Generate health plan and PDF
 
 Each Gemini/ADK request may take 5–15 seconds.
 
+---
+
 ### Web Interface Screenshot
 ![Web Interface Screenshot](outputs/interface.png)
 
