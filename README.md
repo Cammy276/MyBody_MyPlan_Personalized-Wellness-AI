@@ -1,6 +1,6 @@
 # MyBody, MyPlan: Personalized Wellness AI
 
-This project is a **Streamlit-based web app** that uses Google ADK (Gemini 3.1 Flash Lite) and multiple AI agents to generate **personalized nutrition, lifestyle, and action plans**, including PDF reports.
+This project is a **Streamlit-based web app** that uses Google ADK and multiple AI agents to generate **personalized nutrition, lifestyle, and action plans**, including PDF reports.
 
 ---
 
