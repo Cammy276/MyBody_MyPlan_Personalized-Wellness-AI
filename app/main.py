@@ -22,7 +22,7 @@ st.set_page_config(page_title="Personalized Health Planner", layout="wide")
 st.markdown(
     """
     <div style="text-align:center; width:100%; margin:auto;">
-        <h1>Personalized Nutrition & Lifestyle Planner</h1>
+        <h1>MyBody, MyPlan: Personalized Wellness AI</h1>
         <p>Enter your personal details to generate a health plan</p>
     </div>
     """,
