@@ -324,8 +324,8 @@ Generate health plan and PDF
 Each Gemini/ADK request may take 5–15 seconds.
 
 ### Web Interface Screenshot
-![Web Interface Screenshot](assets/interface.png)
+![Web Interface Screenshot](outputs/interface.png)
 
 ### Sample Generated Report
 You can download a sample personalized PDF report here:  
-[Download Sample PDF Report](assets/health_report.pdf)
+[Download Sample PDF Report](outputs/health_report.pdf)
