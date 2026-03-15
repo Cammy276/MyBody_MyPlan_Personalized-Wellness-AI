@@ -17,10 +17,7 @@ This diagram shows how the three main agents interact in sequence and parallel t
 
 ### 2️⃣ System Architecture Diagram (Mermaid)
 
----
-config:
-  layout: fixed
----
+```mermaid
 flowchart TB
  subgraph NutritionAgentWorkflow["Nutrition Agent Workflow"]
     direction TB
@@ -49,7 +46,7 @@ flowchart TB
   end
     A["User Input Form: Age, Weight, Height, Sex, Occupation, Activity Level"] -- Raw user input --> B["Input Validation Function"]
     B -- Validated Metrics JSON --> C["Metrics Function (health_tools)"]
-    C L_C_NutritionAgentWorkflow_0@--> NutritionAgentWorkflow & LifestyleAgentWorkflow
+    C --> NutritionAgentWorkflow & LifestyleAgentWorkflow
     D1 --> D2
     D2 -- Safe --> D3
     D2 -- Unsafe --> D7
@@ -68,16 +65,8 @@ flowchart TB
     F5 -- Consolidated Action Plan JSON --> G["Report Generator Function (local)"]
     G -- PDF Report --> H["PDF Report with Nutrition + Lifestyle + SMART Objectives"]
     H -- Downloadable PDF --> I["User Downloads PDF"]
-    F["Action Plan Agent Workflow"] --> ActionPlanAgentWorkflow
     LifestyleAgentWorkflow --> F
     NutritionAgentWorkflow --> F
 
-     D2:::localFunc
-     D5:::localFunc
-     F2:::localFunc
-     B:::localFunc
-     C:::localFunc
-     G:::localFunc
+    class D2,D5,F2,B,C,G localFunc
     classDef localFunc fill:#FFECB3,stroke:#FF6F00,stroke-width:2px,color:#000000
-
-    L_C_NutritionAgentWorkflow_0@{ curve: linear }
