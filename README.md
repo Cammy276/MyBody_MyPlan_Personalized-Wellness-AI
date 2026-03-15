@@ -118,7 +118,10 @@ flowchart TB
 
     class D2,D5,F2,B,C,G localFunc
     classDef localFunc fill:#FFECB3,stroke:#FF6F00,stroke-width:2px,color:#000000
----------------
+```
+
+---
+
 ⚙️ Local Deployment (Testing)
 
 Required if you want to test Model Armor / Gemini API locally.
@@ -268,3 +271,10 @@ Input user metrics: age, weight, height, occupation, activity level
 Generate health plan and PDF
 
 Each Gemini/ADK request may take 5–15 seconds.
+
+### Web Interface Screenshot
+![Web Interface Screenshot](assets/interface.png)
+
+### Sample Generated Report
+You can download a sample personalized PDF report here:  
+[Download Sample PDF Report](assets/health_report.pdf)
