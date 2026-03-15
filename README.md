@@ -27,6 +27,47 @@ Voice over Demo link on Youtube: https://www.youtube.com/watch?v=Njd9PZFR8gE
 
 ---
 
+# System Architecture Diagram 
+
+```mermaid
+flowchart TB
+    subgraph Frontend
+        UI[Streamlit Web App]
+    end
+
+    subgraph Backend
+        Server[Python Backend / Flask]
+    end
+
+    subgraph AI_Model
+        Gemini[Gemini / ADK Agents]
+        Nutrition[Nutrition Agent]
+        Lifestyle[Lifestyle Agent]
+        ActionPlan[Action Plan Agent]
+        Gemini --> Nutrition
+        Gemini --> Lifestyle
+        Gemini --> ActionPlan
+    end
+
+    subgraph Environment
+        Env[Environment Variables / Cloud Secret Manager]
+    end
+
+    subgraph Deployment
+        Docker[Docker Container]
+        CloudRun[Google Cloud Run]
+        CloudBuild[Cloud Build]
+    end
+
+    UI --> Server
+    Server --> Gemini
+    Server --> Env
+    Server --> Docker
+    Docker --> CloudRun
+    CloudBuild --> Docker
+```
+---
+
 # Functional Diagrams
 
 ```mermaid
@@ -66,10 +107,7 @@ F --> G
 G --> H
 H --> I
 ```
-
 ---
-
-# System Architecture Diagram 
 
 ```mermaid
 flowchart TB
@@ -125,7 +163,6 @@ flowchart TB
     class D2,D5,F2,B,C,G localFunc
     classDef localFunc fill:#FFECB3,stroke:#FF6F00,stroke-width:2px,color:#000000
 ```
-
 ---
 
 # ⚙️ Local Deployment (Testing)
