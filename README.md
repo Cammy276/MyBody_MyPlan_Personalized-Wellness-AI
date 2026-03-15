@@ -7,9 +7,12 @@ This project provides a personalized health & wellness plan generator using Stre
 This project is a **Streamlit-based web app** that uses Google ADK and multiple AI agents to generate **personalized nutrition, lifestyle, and action plans**, including PDF reports.
 
 Deployment link on Google Cloud: https://mybodyplan-1034997483221.us-central1.run.app/
+
 Voice over Demo link on Youtube: https://www.youtube.com/watch?v=Njd9PZFR8gE
 
-📌 Tech Stack
+---
+
+# 📌 Tech Stack
 | Component                       | Technology / Tool                                             |
 | ------------------------------- | ------------------------------------------------------------- |
 | Frontend / UI                   | Streamlit                                                     |
@@ -22,7 +25,9 @@ Voice over Demo link on Youtube: https://www.youtube.com/watch?v=Njd9PZFR8gE
 | Local Development               | Python 3.10+, Google Cloud CLI, Virtual Environment           |
 | Dependencies Management         | `requirements.txt`                                            |
 
-## Functional Diagrams
+---
+
+# Functional Diagrams
 
 ```mermaid
 flowchart TD
@@ -64,7 +69,7 @@ H --> I
 
 ---
 
-### System Architecture Diagram 
+# System Architecture Diagram 
 
 ```mermaid
 flowchart TB
